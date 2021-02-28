@@ -18,10 +18,24 @@ export function PeopleTable(props) {
     return person.name.first.includes(filter);
   });
 
-  for (let i = 0; i < filteredPeople.length; i++) {
+  const sortedFilteredPeople = filteredPeople.sort((a, b) => {
+    var nameA = a.name.first.toUpperCase(); // ignore upper and lowercase
+    var nameB = b.name.first.toUpperCase(); // ignore upper and lowercase
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+    // names must be equal
+    return 0;
+  });
+
+  for (let i = 0; i < sortedFilteredPeople.length; i++) {
     //loop through the responses and add them into an array with just the values I want
     //rows is an array of people object
-    const person = filteredPeople[i];
+    const person = sortedFilteredPeople[i];
+
     //need to create a row for this person
     rows.push(
       <PeopleRow

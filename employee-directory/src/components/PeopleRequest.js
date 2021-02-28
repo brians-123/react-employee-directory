@@ -9,7 +9,7 @@ import { PeopleTable } from "./PeopleTable";
 
 export function PeopleRequest() {
   return (
-    <Get url="https://randomuser.me/api/?results=2">
+    <Get url="https://randomuser.me/api/?results=50">
       {(error, response, isLoading, makeRequest, axios) => {
         if (error) {
           return (

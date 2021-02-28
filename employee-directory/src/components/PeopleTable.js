@@ -3,9 +3,12 @@ import { PeopleRow } from "./PeopleRow";
 
 //we expect props to contain the people property
 export function PeopleTable(props) {
-  const [sortedField, setSortedField] = React.useState(null);
-  // const [sortOrder, setSortOrder] = React.useState(null);
+  const [sortedField, setSortedField] = React.useState(`["email"]`);
+
   console.log(sortedField);
+  console.log(props.people[0]["name"]["first"]);
+
+  console.log(`${sortedField}`);
 
   // Declare a new state variable, which we'll call "count"
   const [count, setCount] = useState(0);
@@ -21,11 +24,12 @@ export function PeopleTable(props) {
   const filteredPeople = props.people.filter(person => {
     return person.name.first.includes(filter);
   });
-
   //sort the filtered list by first name ascending
   const sortedFilteredPeople = filteredPeople.sort((a, b) => {
-    var nameA = a.name.first.toUpperCase(); // ignore upper and lowercase
-    var nameB = b.name.first.toUpperCase(); // ignore upper and lowercase
+    var stringifiedA = JSON.stringify(a);
+    console.log(`${a}`);
+    var nameA = a[sortedField].toUpperCase(); // ignore upper and lowercase
+    var nameB = b[sortedField].toUpperCase(); // ignore upper and lowercase
     if (nameA < nameB) {
       return -1;
     }
@@ -64,57 +68,24 @@ export function PeopleTable(props) {
           />
         </div>
       </div>
-      <table class="table">
+      <table className="table">
         <thead>
           <tr>
             <th>#</th>
             <th>
               {/* sort ascending or descending by first name*/}
-              <button
-                onClick={
-                  () => setSortedField("first")
-
-                  // if (priorSortOrder === "ascending") {
-                  //sort in descending order
-                  // } else {
-                  //sort in ascending order
-                  // }
-                  // }
-                }
-              >
+              <button onClick={() => setSortedField(`["name"]["first"]`)}>
                 First Name
               </button>
             </th>
             <th>
               {/* sort ascending or descending by first name*/}
-              <button
-                onClick={
-                  () => setSortedField("last")
-
-                  // if (priorSortOrder === "ascending") {
-                  //sort in descending order
-                  // } else {
-                  //sort in ascending order
-                  // }
-                  // }
-                }
-              >
+              <button onClick={() => setSortedField(`["name"]["last"]`)}>
                 Last Name{" "}
               </button>
             </th>
             <th>
-              <button
-                onClick={
-                  () => setSortedField("username")
-
-                  // if (priorSortOrder === "ascending") {
-                  //sort in descending order
-                  // } else {
-                  //sort in ascending order
-                  // }
-                  // }
-                }
-              >
+              <button onClick={() => setSortedField(`["email"]`)}>
                 Username{" "}
               </button>
             </th>

@@ -4,9 +4,10 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ReactDOM from "react-dom";
 import { PeopleTable } from "./components/PeopleTable";
+import { PeopleRequest } from "./components/PeopleRequest";
 
 function App() {
-  return <PeopleTable />;
+  return <PeopleRequest />;
 }
 
 export default App;

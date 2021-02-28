@@ -6,10 +6,10 @@ export function PeopleRow(props) {
   //needs parameters aka props
   return (
     <tr>
-      <th scope="row">1</th>
+      <th scope="row">{props.rowNumber}</th>
       <td>{props.first}</td>
       <td>{props.last}</td>
-      <td>{props.username}</td>
+      <td>{props.email}</td>
     </tr>
   );
 }

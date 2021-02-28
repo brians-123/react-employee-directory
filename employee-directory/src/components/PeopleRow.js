@@ -1,8 +1,15 @@
 import React, { useState } from "react";
 
-export function PeopleRow() {
-  // Declare a new state variable, which we'll call "row"
-  const [row, setRow] = useState(0);
-  
-  // 
-  const peopleRows = [<div>Hello</div>, <div>World</div>]
+//first, last, username
+export function PeopleRow(props) {
+  //Declare a new state variable, which we'll call "rows"
+  //needs parameters aka props
+  return (
+    <tr>
+      <th scope="row">1</th>
+      <td>{props.first}</td>
+      <td>{props.last}</td>
+      <td>{props.username}</td>
+    </tr>
+  );
+}

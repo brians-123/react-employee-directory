@@ -31,6 +31,19 @@ export function PeopleTable() {
               <div>
                 {/* this prints out the response, will make a table with relevant data */}
                 {JSON.stringify(response.data)}
+                <div className="form-group row">
+                  {/* <label for="example-text-input" class="col-2 col-form-label">
+                    Text
+                  </label> */}
+                  <div className="col-12">
+                    <input
+                      className="form-control"
+                      type="text"
+                      value="Enter your filter"
+                      id="example-text-input"
+                    />
+                  </div>
+                </div>
                 <table class="table">
                   <thead>
                     <tr>

@@ -6,16 +6,22 @@ export function PeopleTable(props) {
   // Declare a new state variable, which we'll call "count"
   const [count, setCount] = useState(0);
 
-  // const peopleArray = [<tr><td>first</td><td>last</td><td>username</td></tr>, <td>first2</td><td>last2</td><td>username2</td>];
   const rows = [];
   console.log(props);
   if (!props.people) {
     return null;
   }
-  for (let i = 0; i < props.people.length; i++) {
+
+  //Before returning, if filtering, use the filtered results
+  const filter = "a";
+  const filteredPeople = props.people.filter(person => {
+    return person.name.first.includes(filter);
+  });
+
+  for (let i = 0; i < filteredPeople.length; i++) {
     //loop through the responses and add them into an array with just the values I want
     //rows is an array of people object
-    const person = props.people[i];
+    const person = filteredPeople[i];
     //need to create a row for this person
     rows.push(
       <PeopleRow
@@ -26,18 +32,9 @@ export function PeopleTable(props) {
       />
     );
   }
+
   return (
     <div>
-      <div className="form-group row">
-        <div className="col-12">
-          <input
-            className="form-control"
-            type="text"
-            value="Enter your filter"
-            id="example-text-input"
-          />
-        </div>
-      </div>
       <table class="table">
         <thead>
           <tr>

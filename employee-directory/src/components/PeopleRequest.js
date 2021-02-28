@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Get } from "react-axios";
 import { PeopleTable } from "./PeopleTable";
 
+//add component for filter
+
 //start at the highest (biggest) level, then work down to smallest in react
 // Index-> then use App.js->PeopleRequest.js->PeopleFilter->PeopleTable->PeopleRow
 

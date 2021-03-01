@@ -1,14 +1,41 @@
 import React, { useState } from "react";
 import { PeopleRow } from "./PeopleRow";
 
+const firstNameColumn = {
+  displayName: "First Name",
+  getValue: person => {
+    return person.name.first;
+  }
+};
+
+const lastNameColumn = {
+  displayName: "Last Name",
+  getValue: person => {
+    return person.name.last;
+  }
+};
+
+const emailColumn = {
+  displayName: "Email",
+  getValue: person => {
+    return person.email;
+  }
+};
+
+const columnArray = [firstNameColumn, lastNameColumn, emailColumn];
+
 //we expect props to contain the people property
 export function PeopleTable(props) {
-  const [sortedField, setSortedField] = React.useState(`["email"]`);
+  const [sortColumn, setSortColumn] = React.useState(null);
+  //will use the state here and change it on each button click to sort ascending or desc
+  const [sortDirection, setSortDirection] = React.useState(null);
 
-  console.log(sortedField);
+  console.log(sortColumn);
+  console.log(sortDirection);
   console.log(props.people[0]["name"]["first"]);
+  //need to the ability to take the name out of the
 
-  console.log(`${sortedField}`);
+  console.log(`${sortColumn}`);
 
   // Declare a new state variable, which we'll call "count"
   const [count, setCount] = useState(0);
@@ -24,21 +51,26 @@ export function PeopleTable(props) {
   const filteredPeople = props.people.filter(person => {
     return person.name.first.includes(filter);
   });
+
+  let sortedFilteredPeople;
   //sort the filtered list by first name ascending
-  const sortedFilteredPeople = filteredPeople.sort((a, b) => {
-    var stringifiedA = JSON.stringify(a);
-    console.log(`${a}`);
-    var nameA = a[sortedField].toUpperCase(); // ignore upper and lowercase
-    var nameB = b[sortedField].toUpperCase(); // ignore upper and lowercase
-    if (nameA < nameB) {
-      return -1;
-    }
-    if (nameA > nameB) {
-      return 1;
-    }
-    // names must be equal
-    return 0;
-  });
+  if (!sortColumn) {
+    sortedFilteredPeople = filteredPeople;
+  } else {
+    sortedFilteredPeople = filteredPeople.sort((a, b) => {
+      var nameA = sortColumn.getValue(a).toUpperCase(); // ignore upper and lowercase
+      var nameB = sortColumn.getValue(b).toUpperCase(); // ignore upper and lowercase
+
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      // names must be equal
+      return 0;
+    });
+  }
 
   for (let i = 0; i < sortedFilteredPeople.length; i++) {
     //loop through the responses and add them into an array with just the values I want
@@ -53,6 +85,17 @@ export function PeopleTable(props) {
         last={person.name.last}
         email={person.email}
       />
+    );
+  }
+  const headers = [];
+  for (let i = 0; i < columnArray.length; i++) {
+    //loop through the columns and add the column display into the html
+    headers.push(
+      <th>
+        <button onClick={() => setSortColumn(columnArray[i])}>
+          {columnArray[i].displayName}
+        </button>
+      </th>
     );
   }
 
@@ -72,23 +115,7 @@ export function PeopleTable(props) {
         <thead>
           <tr>
             <th>#</th>
-            <th>
-              {/* sort ascending or descending by first name*/}
-              <button onClick={() => setSortedField(`["name"]["first"]`)}>
-                First Name
-              </button>
-            </th>
-            <th>
-              {/* sort ascending or descending by first name*/}
-              <button onClick={() => setSortedField(`["name"]["last"]`)}>
-                Last Name{" "}
-              </button>
-            </th>
-            <th>
-              <button onClick={() => setSortedField(`["email"]`)}>
-                Username{" "}
-              </button>
-            </th>
+            {headers}
           </tr>
         </thead>
         <tbody>{rows}</tbody>

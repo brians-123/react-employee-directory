@@ -30,15 +30,20 @@ export function PeopleTable(props) {
   //will use the state here and change it on each button click to sort ascending or desc
   const [sortDirection, setSortDirection] = React.useState(null);
 
-  console.log(sortColumn);
-  console.log(sortDirection);
-  console.log(props.people[0]["name"]["first"]);
-  //need to the ability to take the name out of the
+  //setting up filtering in this component prior to moving it down to PeopleFilter
+  const [filterText, setFilterText] = useState("");
 
-  console.log(`${sortColumn}`);
+  const onChange = evt => {
+    setFilterText(evt.target.value);
+  };
 
   // Declare a new state variable, which we'll call "count"
   const [count, setCount] = useState(0);
+
+  //set the filter text when the value changes
+  const handleInputChange = evt => {
+    // alert(`submitting ${filterText}`);
+  };
 
   const rows = [];
   console.log(props);
@@ -49,7 +54,7 @@ export function PeopleTable(props) {
   //Before returning, if filtering, use the filtered results
   const filter = "a";
   const filteredPeople = props.people.filter(person => {
-    return person.name.first.includes(filter);
+    return person.name.first.includes(filterText);
   });
 
   let sortedFilteredPeople;
@@ -106,7 +111,9 @@ export function PeopleTable(props) {
           <input
             className="form-control"
             type="text"
-            value="Enter your filter"
+            defaultValue="Enter your filter"
+            value={filterText}
+            onChange={onChange}
             id="example-text-input"
           />
         </div>

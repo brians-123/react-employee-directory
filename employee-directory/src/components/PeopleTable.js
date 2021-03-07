@@ -28,6 +28,7 @@ const columnArray = [firstNameColumn, lastNameColumn, emailColumn];
 //we expect props to contain the people property
 export function PeopleTable(props) {
   const [sortColumn, setSortColumn] = React.useState(null);
+
   //will use the state here and change it on each button click to sort ascending or desc
   const [sortDirection, setSortDirection] = React.useState(null);
 
@@ -55,9 +56,14 @@ export function PeopleTable(props) {
     sortedFilteredPeople = filteredPeople;
   } else {
     sortedFilteredPeople = filteredPeople.sort((a, b) => {
-      var nameA = sortColumn.getValue(a).toUpperCase(); // ignore upper and lowercase
-      var nameB = sortColumn.getValue(b).toUpperCase(); // ignore upper and lowercase
-
+      //allow sortDirection state to flip the direction of sort function
+      let nameA = sortColumn.getValue(a).toUpperCase(); // ignore upper and lowercase
+      let nameB = sortColumn.getValue(b).toUpperCase(); // ignore upper and lowercase
+      //flip the direction
+      if (sortDirection === "descending") {
+        nameB = sortColumn.getValue(a).toUpperCase(); // ignore upper and lowercase
+        nameA = sortColumn.getValue(b).toUpperCase(); // ignore upper and lowercase
+      }
       if (nameA < nameB) {
         return -1;
       }
@@ -89,7 +95,19 @@ export function PeopleTable(props) {
     //loop through the columns and add the column display into the html
     headers.push(
       <th>
-        <button onClick={() => setSortColumn(columnArray[i])}>
+        <button
+          onClick={() => {
+            setSortColumn(columnArray[i]);
+            //initally, sort by a-z, then z-a if it has been sorted
+            //3 states. start as unsorted, then ascending, then descending
+            //handle switching sort columns. If the prior target != current target
+            if (sortDirection === "ascending") {
+              setSortDirection("descending");
+            } else {
+              setSortDirection("ascending");
+            }
+          }}
+        >
           {columnArray[i].displayName}
         </button>
       </th>

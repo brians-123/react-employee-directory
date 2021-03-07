@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 //first, last, username
 export function PeopleRow(props) {

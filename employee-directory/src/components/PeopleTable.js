@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { PeopleFilter } from "./PeopleFilter";
 import { PeopleRow } from "./PeopleRow";
 
 const firstNameColumn = {
@@ -37,14 +38,6 @@ export function PeopleTable(props) {
     setFilterText(evt.target.value);
   };
 
-  // Declare a new state variable, which we'll call "count"
-  const [count, setCount] = useState(0);
-
-  //set the filter text when the value changes
-  const handleInputChange = evt => {
-    // alert(`submitting ${filterText}`);
-  };
-
   const rows = [];
   console.log(props);
   if (!props.people) {
@@ -52,7 +45,6 @@ export function PeopleTable(props) {
   }
 
   //Before returning, if filtering, use the filtered results
-  const filter = "a";
   const filteredPeople = props.people.filter(person => {
     return person.name.first.includes(filterText);
   });
@@ -106,18 +98,7 @@ export function PeopleTable(props) {
 
   return (
     <div>
-      <div className="form-group row">
-        <div className="col-12">
-          <input
-            className="form-control"
-            type="text"
-            defaultValue="Enter your filter"
-            value={filterText}
-            onChange={onChange}
-            id="example-text-input"
-          />
-        </div>
-      </div>
+      <PeopleFilter value={filterText} onChange={onChange} />
       <table className="table">
         <thead>
           <tr>

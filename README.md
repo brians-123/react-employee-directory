@@ -21,11 +21,11 @@ As an employer, I want a way to sort and filter my employees, so that I may find
 
 ## Installation <a id="installation"></a> :floppy_disk:
 
-The app is hosted using heroku here
+The app is hosted using github pages [here](https://brians-123.github.io/react-employee-directory/)
 
 ## Usage <a id="usage"></a> :computer:
 
-Go to the app hosted here. Filter the list by typing into the filter and sort by clicking on the header buttons.
+Go to the app hosted [here](https://brians-123.github.io/react-employee-directory/). Filter the list by typing into the filter and sort by clicking on the header buttons.
 
 ## License <a id="license"></a> :copyright:
 

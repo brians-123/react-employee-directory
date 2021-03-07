@@ -40,14 +40,13 @@ export function PeopleTable(props) {
   };
 
   const rows = [];
-  console.log(props);
   if (!props.people) {
     return null;
   }
 
   //Before returning, if filtering, use the filtered results
   const filteredPeople = props.people.filter(person => {
-    return person.name.first.includes(filterText);
+    return person.name.first.toUpperCase().includes(filterText.toUpperCase());
   });
 
   let sortedFilteredPeople;
@@ -94,8 +93,9 @@ export function PeopleTable(props) {
   for (let i = 0; i < columnArray.length; i++) {
     //loop through the columns and add the column display into the html
     headers.push(
-      <th>
+      <th className="text-left px-0">
         <button
+          className="btn btn-link text-white"
           onClick={() => {
             setSortColumn(columnArray[i]);
             //initally, sort by a-z, then z-a if it has been sorted
@@ -117,9 +117,9 @@ export function PeopleTable(props) {
   return (
     <div>
       <PeopleFilter value={filterText} onChange={onChange} />
-      <table className="table">
+      <table className="table table-striped">
         <thead>
-          <tr>
+          <tr className="bg-secondary">
             <th>#</th>
             {headers}
           </tr>

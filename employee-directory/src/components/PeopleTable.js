@@ -23,7 +23,19 @@ const emailColumn = {
   }
 };
 
-const columnArray = [firstNameColumn, lastNameColumn, emailColumn];
+const pictureColumn = {
+  displayName: "picture",
+  getValue: person => {
+    return person.picture.thumbnail;
+  }
+};
+
+const columnArray = [
+  firstNameColumn,
+  lastNameColumn,
+  emailColumn,
+  pictureColumn
+];
 
 //we expect props to contain the people property
 export function PeopleTable(props) {
@@ -86,6 +98,7 @@ export function PeopleTable(props) {
         first={person.name.first}
         last={person.name.last}
         email={person.email}
+        picture={person.picture.thumbnail}
       />
     );
   }

@@ -10,6 +10,9 @@ export function PeopleRow(props) {
       <td>{props.first}</td>
       <td>{props.last}</td>
       <td>{props.email}</td>
+      <td>
+        <img src={props.picture} alt="person" />
+      </td>
     </tr>
   );
 }

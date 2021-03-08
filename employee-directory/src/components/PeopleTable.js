@@ -99,14 +99,16 @@ export function PeopleTable(props) {
         last={person.name.last}
         email={person.email}
         picture={person.picture.thumbnail}
+        key={person.login.uuid}
       />
     );
   }
+
   const headers = [];
   for (let i = 0; i < columnArray.length; i++) {
     //loop through the columns and add the column display into the html
     headers.push(
-      <th className="text-left px-0">
+      <th className="text-left px-0" key={i}>
         <button
           className="btn btn-link text-white"
           onClick={() => {

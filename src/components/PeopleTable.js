@@ -24,7 +24,7 @@ const emailColumn = {
 };
 
 const pictureColumn = {
-  displayName: "picture",
+  displayName: "Picture",
   getValue: person => {
     return person.picture.thumbnail;
   }
